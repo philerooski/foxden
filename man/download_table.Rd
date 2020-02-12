@@ -4,12 +4,22 @@
 \alias{download_table}
 \title{Download a table}
 \usage{
-download_table(table, download_to = NULL, database = "fox_integrated")
+download_table(
+  table,
+  download_to = ".",
+  filters = NULL,
+  database = "fox_integrated"
+)
 }
 \arguments{
-\item{table}{The table name}
+\item{table}{The table name.}
 
-\item{download_to}{Local folder to download the table to}
+\item{download_to}{Local folder to download the table to.
+Defaults to the current working directory.}
+
+\item{filters}{(Experimental. It's not clear the API supports this yet).
+A list containing <column> = <value> pairs to filter the
+table contents on.}
 
 \item{inheritParams}{list_tables}
 }

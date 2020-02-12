@@ -18,6 +18,10 @@ foxPOST <- function(endpoint, ...) {
 
 #' Log in to Fox Den
 #'
+#' Log in by inputting your username and password or cache your credentials in
+#' a YAML file with the name \code{.foxdenCredentials} in your home (~) directory.
+#' This file should have keys \code{email} and \code{password}.
+#'
 #' @param email Your email
 #' @param password Your Fox Den password
 #' @export
@@ -30,15 +34,14 @@ fox_login <- function(email = NULL, password = NULL) {
   response <- foxPOST("/sync/v1/auth",
                       query = list(email = credentials$email),
                       body = credentials$password)
-  api_key <- content(response)$key
+  api_key <- httr::content(response)$key
   Sys.setenv(FOX_DEN_API_KEY = api_key)
-  return(TRUE)
 }
 
 #' Make a REST call to Fox Den
 #'
 #' @param endpoint Server endpoint.
-#' @param method function which accepts the API endpoint as its first argument
+#' @param method An HTTP verb function
 #' @param body The body of the request
 #' @param ... named arguments to pass to \code{httr::modify_url}
 fox <- function(endpoint, method, body = NULL, ...) {
@@ -49,9 +52,13 @@ fox <- function(endpoint, method, body = NULL, ...) {
                           query = args$query, params = args$params,
                           fragment = args$fragment, username = args$username,
                           password = args$password)
-  print(url)
-  results <- method(url, body = body)
-  return(results)
+  response <- method(url,
+                     config = httr::user_agent("https://github.com/philerooski/foxden"),
+                     body = body)
+  if (httr::http_error(response)) {
+    stop(httr::content(response)$status)
+  }
+  return(response)
 }
 
 #' Fetch credentials from Fox Den credentials file

@@ -9,7 +9,7 @@ fox(endpoint, method, body = NULL, ...)
 \arguments{
 \item{endpoint}{Server endpoint.}
 
-\item{method}{function which accepts the API endpoint as its first argument}
+\item{method}{An HTTP verb function}
 
 \item{body}{The body of the request}
 

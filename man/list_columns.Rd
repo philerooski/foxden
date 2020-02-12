@@ -7,9 +7,9 @@
 list_columns(table, database = "fox_integrated")
 }
 \arguments{
-\item{table}{The table name}
+\item{table}{The table name.}
 
-\item{database}{The name of the database}
+\item{database}{The name of the database.}
 }
 \description{
 List columns and column destinations of a table

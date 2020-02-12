@@ -12,5 +12,7 @@ fox_login(email = NULL, password = NULL)
 \item{password}{Your Fox Den password}
 }
 \description{
-Log in to Fox Den
+Log in by inputting your username and password or cache your credentials in
+a YAML file with the name \code{.foxdenCredentials} in your home (~) directory.
+This file should have keys \code{email} and \code{password}.
 }

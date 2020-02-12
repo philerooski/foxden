@@ -7,7 +7,7 @@
 list_tables(database = "fox_integrated")
 }
 \arguments{
-\item{database}{The name of the database}
+\item{database}{The name of the database.}
 }
 \description{
 List tables in a database
